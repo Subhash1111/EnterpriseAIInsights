@@ -1,64 +1,402 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { useState } from "react";
+
+const SOCIAL_LINKS = {
+  linkedin: "https://www.linkedin.com/in/subhash-tatavarthi-a7608014/",
+  medium: "https://medium.com/@t.subhash",
+  github: "https://github.com/Subhash1111",
+  email: "mailto:t.subhash1111@gmail.com",
+};
+
+
+const FEATURED_PROFILE = {
+  name: "Subhash Tatavarthi",
+  headline: "Enterprise Architect • Writer • Builder in Public",
+  location: "Celina, TX",
+  tagline:
+    "I write about what I’m building, learning, and breaking — in public.",
+};
+
+const ORIGINAL_BLOG_POSTS = [
+  {
+    title: "Why I Write in Public",
+    slug: "why-i-write-in-public",
+    date: "2024-08-20",
+    readTime: "5 min",
+    summary:
+      "Why I share my work, drafts, and mistakes instead of waiting for perfection.",
+  },
+  {
+    title: "My Engineering Principles",
+    slug: "my-engineering-principles",
+    date: "2024-08-05",
+    readTime: "7 min",
+    summary:
+      "A living list of principles that guide how I design, build, and ship software.",
+  },
+];
+
+const MEDIUM_POSTS = [
+  {
+    title: "From Data Engineering — AI : Transform yourselves in simple ways",
+    url: "https://medium.com/@t.subhash/from-data-engineering-ai-transform-yourselves-in-simple-ways-6178c4863021",
+    date: "2025-07-25",
+    tag: "Data Engineering to AI",
+  },
+  {
+    title: "From Idea to Impact: How to Implement Generative AI for Any Business Use Case",
+    url: "https://medium.com/@t.subhash/from-idea-to-impact-how-to-implement-generative-ai-for-any-business-use-case-4ad5c58a07d4",
+    date: "2025-07-25",
+    tag: "Generative AI",
+  },
+  {
+    title: "Why Vector Databases Are the Secret Ingredient for Smarter Search",
+    url: "https://medium.com/@t.subhash/why-vector-databases-are-the-secret-ingredient-for-smarter-search-5fc8c3ccd64b",
+    date: "2024-08-15",
+    tag: "Generative AI",
+  },
+];
+
+
+
+const JOURNALS = [
+  {
+    title: "Scalable GenAI Systems for Enterprise Decision Intelligence: Architecture and Adoption Strategies",
+    url:"https://www.jisem-journal.com/index.php/journal/article/view/11912",
+    date: "2025-06-25",
+    summary: "Scalable GenAI Systems for Enterprise Decision Intelligence: Architecture and Adoption Strategies",
+  },
+  {
+    title: "Domain Aware Prompt Engineering",
+    url:"https://journalwjaets.com/sites/default/files/fulltext_pdf/WJAETS-2025-1249.pdf",
+    date: "2025-07-25",
+    summary: "Domain Aware Prompt Engineering",
+  },
+  {
+    title: "Optimising Data Loss Prevention (DLP) Strategies in Cloud-Native Financial Platforms",
+    url:"https://www.jisem-journal.com/index.php/journal/article/view/11983",
+    date: "2025-07-25",
+    summary: "Optimising Data Loss Prevention (DLP) Strategies in Cloud-Native Financial Platforms",
+  },
+
+];
+
+const MEDIA_PUBLICATIONS = [
+  {
+    outlet: "APN Media",
+    title: "Reframing Generative AI for the Enterprise: From Hype to Architecture-led Value",
+    url: "https://www.apnnews.com/reframing-generative-ai-for-the-enterprise-from-hype-to-architecture-led-value/",
+    date: "2025-06-23",
+  },
+  {
+    outlet: "CXO Today",
+    title: "Most Enterprises Are Building GenAI Wrong—Here’s What CTOs and CIOs Must Do Differently",
+    url: "https://cxotoday.com/specials/most-enterprises-are-building-genai-wrong-heres-what-ctos-and-cios-must-do-differently/",
+    date: "2025-07-28",
+  },
+  {
+    outlet: "Hans India",
+    title: "From Dashboards to Decision Intelligence: Vision for GenAI in the Enterprise",
+    url: "https://www.thehansindia.com/news/business/from-dashboards-to-decision-intelligencevision-for-genai-in-the-enterprise-996212",
+    date: "2025-08-15",
+  },
+];
+
+const navItems = [
+  { id: "about", label: "Profile" },
+  { id: "writing", label: "Writing" },
+  { id: "journals", label: "Journals" },
+  { id: "media", label: "Media" },
+];
+
+export default function HomePage() {
+  const [activeNav, setActiveNav] = useState<string>("about");
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    setActiveNav(id);
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-slate-950 text-slate-50">
+      {/* Top bar */}
+      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+          <button
+            className="text-lg font-semibold tracking-tight"
+            onClick={() => scrollTo("hero")}
+          >
+            <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
+              {FEATURED_PROFILE.name}
+            </span>
+          </button>
+
+          <nav className="hidden gap-4 text-sm md:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`rounded-full px-3 py-1 transition ${
+                  activeNav === item.id
+                    ? "bg-slate-800 text-slate-50"
+                    : "text-slate-300 hover:bg-slate-800/70 hover:text-slate-50"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3 text-sm">
+            <Link
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              className="rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-200 hover:border-cyan-400 hover:text-cyan-300"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              LinkedIn
+            </Link>
+            <Link
+              href={SOCIAL_LINKS.medium}
+              target="_blank"
+              className="hidden rounded-full bg-cyan-500 px-3 py-1 text-xs font-semibold text-slate-950 shadow-lg shadow-cyan-500/30 hover:bg-cyan-400 sm:inline-block"
             >
-              Learning
-            </a>{" "}
-            center.
+              Read on Medium
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-5xl px-4 pb-16 pt-8">
+        {/* Hero / Profile */}
+        <section id="hero" className="grid gap-10 pt-4 md:grid-cols-[2fr,1.4fr]">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              Always building, always learning.
+            </div>
+
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+                {FEATURED_PROFILE.headline}
+              </h1>
+              <p className="mt-3 max-w-xl text-sm text-slate-300 sm:text-base">
+                {FEATURED_PROFILE.tagline}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3 text-sm text-slate-300">
+              <span className="rounded-full border border-slate-800 px-3 py-1">
+                {FEATURED_PROFILE.location}
+              </span>
+              <span className="rounded-full border border-slate-800 px-3 py-1">
+                Writing about software, systems, and real-world lessons.
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-3 text-sm">
+              <Link
+                href={SOCIAL_LINKS.medium}
+                target="_blank"
+                className="rounded-full bg-cyan-500 px-4 py-2 font-semibold text-slate-950 shadow-lg shadow-cyan-500/30 hover:bg-cyan-400"
+              >
+                Read my latest posts
+              </Link>
+              <Link
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                className="rounded-full border border-slate-700 px-4 py-2 font-medium text-slate-200 hover:border-cyan-400 hover:text-cyan-300"
+              >
+                Connect on LinkedIn
+              </Link>
+            </div>
+          </div>
+
+          {/* Side card */}
+          <aside className="space-y-4">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+              <div className="flex items-center gap-4">
+                <div className="h-16 w-16 rounded-full bg-gradient-to-br from-cyan-500 to-violet-500" />
+                <div>
+                  <h2 className="text-base font-semibold">
+                    {FEATURED_PROFILE.name}
+                  </h2>
+                  <p className="text-xs text-slate-300">
+                    Writing, building, and sharing the journey in public.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 space-y-1 text-xs text-slate-300">
+                <p>• Software & systems</p>
+                <p>• Learning and career journals</p>
+                <p>• Long-form essays & media features</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-4 text-xs text-slate-300">
+              This site is my digital studio. It collects:
+              <ul className="mt-2 list-disc space-y-1 pl-5">
+                <li>Deep-dive posts from Medium</li>
+                <li>Personal build & learning journals</li>
+                <li>Talks, podcasts, and media mentions</li>
+              </ul>
+            </div>
+          </aside>
+        </section>
+
+        {/* Profile */}
+        <section id="about" className="mt-16 space-y-4">
+          <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+            Profile
+          </h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            I’m a{" "}
+            <span className="font-medium text-slate-100">
+              software engineer and writer
+            </span>{" "}
+            who enjoys turning complex problems into clear systems and clear
+            stories. This blog is where I document experiments, wins, failures,
+            and frameworks I’m testing in the real world.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        </section>
+
+        {/* Writing */}
+        <section id="writing" className="mt-16 space-y-6">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+              Writing
+            </h2>
+            <Link
+              href={SOCIAL_LINKS.medium}
+              target="_blank"
+              className="text-xs font-medium text-cyan-400 hover:text-cyan-300"
+            >
+              View all on Medium →
+            </Link>
+          </div>
+
+          {/* Featured blog posts */}
+          <div className="grid gap-4 md:grid-cols-2">
+            {ORIGINAL_BLOG_POSTS.map((post) => (
+              <article
+                key={post.slug}
+                className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 transition hover:border-cyan-500/70 hover:bg-slate-900"
+              >
+                <div className="flex items-center justify-between text-xs text-slate-400">
+                  <span>{post.date}</span>
+                  <span>{post.readTime}</span>
+                </div>
+                <h3 className="mt-2 text-sm font-semibold text-slate-50 group-hover:text-cyan-300 sm:text-base">
+                  {post.title}
+                </h3>
+                <p className="mt-2 text-xs text-slate-300 sm:text-sm">
+                  {post.summary}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          {/* Medium posts */}
+          <div className="mt-4 space-y-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              Latest from Medium
+            </h3>
+            <div className="divide-y divide-slate-800 rounded-2xl border border-slate-800 bg-slate-950/40">
+              {MEDIUM_POSTS.map((post) => (
+                <Link
+                  key={post.url}
+                  href={post.url}
+                  target="_blank"
+                  className="block px-4 py-3 text-sm hover:bg-slate-900/70"
+                >
+                  <div className="flex items-center justify-between text-xs text-slate-400">
+                    <span>{post.date}</span>
+                    <span className="rounded-full border border-slate-700 px-2 py-0.5 text-[10px] uppercase tracking-wide">
+                      {post.tag}
+                    </span>
+                  </div>
+                  <div className="mt-1 font-medium text-slate-100">
+                    {post.title}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Journals */}
+        <section id="journals" className="mt-16 space-y-4">
+          <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+            Journals
+          </h2>
+          <p className="max-w-2xl text-sm text-slate-300">
+            Short, honest entries about what I’m building and learning each
+            week — less polished than articles, more like notes from the field.
+          </p>
+          <div className="grid gap-4 md:grid-cols-2">
+            {JOURNALS.map((entry) => (
+                <Link
+                  key={entry.title}
+                  href={entry.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <article className="rounded-2xl border border-slate-200 bg-white p-4 hover:border-cyan-300 hover:shadow-md transition-colors">
+                    <div className="text-sm text-slate-500">{entry.date}</div>
+                    <h3 className="mt-1 text-base font-semibold text-slate-800 hover:text-cyan-600">
+                      {entry.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600">
+                      {entry.summary}
+                    </p>
+                  </article>
+                </Link>
+              ))}
+          </div>
+        </section>
+
+        {/* Media */}
+        <section id="media" className="mt-16 space-y-4">
+          <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+            Media & Publications
+          </h2>
+          <p className="max-w-2xl text-sm text-slate-300">
+            Interviews, podcasts, and features where I’ve shared ideas about
+            engineering, writing, and building a career in public.
+          </p>
+          <div className="space-y-3">
+            {MEDIA_PUBLICATIONS.map((item) => (
+              <Link
+                key={item.title}
+                href={item.url}
+                target="_blank"
+                className="block rounded-2xl border border-slate-800 bg-slate-950/40 px-4 py-3 text-sm hover:border-cyan-500/70 hover:bg-slate-900"
+              >
+                <div className="flex items-center justify-between text-xs text-slate-400">
+                  <span>{item.outlet}</span>
+                  <span>{item.date}</span>
+                </div>
+                <div className="mt-1 font-medium text-slate-100">
+                  {item.title}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <footer className="mt-16 border-t border-slate-800 pt-6 text-xs text-slate-500">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <span>
+              © {new Date().getFullYear()} {FEATURED_PROFILE.name}. Built in
+              public.
+            </span>
+            <span>Powered by Next.js · Deployed on Vercel · Writing on Medium.</span>
+          </div>
+        </footer>
       </main>
     </div>
   );
