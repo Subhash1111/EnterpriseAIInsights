@@ -13,30 +13,32 @@ const SOCIAL_LINKS = {
 
 const FEATURED_PROFILE = {
   name: "Subhash Tatavarthi",
-  headline: "Enterprise Architect • Writer • Builder in Public",
+  headline: "Enterprise Architect • Content Writer",
   location: "Celina, TX",
   tagline:
-    "I write about what I’m building, learning, and breaking — in public.",
+    "Sharing insights on enterprise AI architecture, cloud-native solutions, and the journey of building intelligent systems at scale",
 };
 
-const ORIGINAL_BLOG_POSTS = [
-  {
-    title: "Why I Write in Public",
-    slug: "why-i-write-in-public",
-    date: "2024-08-20",
-    readTime: "5 min",
-    summary:
-      "Why I share my work, drafts, and mistakes instead of waiting for perfection.",
-  },
-  {
-    title: "My Engineering Principles",
-    slug: "my-engineering-principles",
-    date: "2024-08-05",
-    readTime: "7 min",
-    summary:
-      "A living list of principles that guide how I design, build, and ship software.",
-  },
-];
+{ORIGINAL_BLOG_POSTS.map((post) => (
+  <Link
+    key={post.slug}
+    href={`/blog/${post.slug}`}
+    className="block"
+  >
+    <article className="group rounded-2xl border ...">
+      <div className="flex items-center justify-between text-xs text-slate-400">
+        <span>{post.date}</span>
+        <span>{post.readTime}</span>
+      </div>
+      <h3 className="mt-2 text-sm font-semibold text-slate-900 group-hover:text-cyan-600 sm:text-base">
+        {post.title}
+      </h3>
+      <p className="mt-2 text-xs text-slate-600 sm:text-sm">
+        {post.summary}
+      </p>
+    </article>
+  </Link>
+))}
 
 const MEDIUM_POSTS = [
   {
