@@ -19,26 +19,24 @@ const FEATURED_PROFILE = {
     "Sharing insights on enterprise AI architecture, cloud-native solutions, and the journey of building intelligent systems at scale",
 };
 
-{ORIGINAL_BLOG_POSTS.map((post) => (
-  <Link
-    key={post.slug}
-    href={`/blog/${post.slug}`}
-    className="block"
-  >
-    <article className="group rounded-2xl border ...">
-      <div className="flex items-center justify-between text-xs text-slate-400">
-        <span>{post.date}</span>
-        <span>{post.readTime}</span>
-      </div>
-      <h3 className="mt-2 text-sm font-semibold text-slate-900 group-hover:text-cyan-600 sm:text-base">
-        {post.title}
-      </h3>
-      <p className="mt-2 text-xs text-slate-600 sm:text-sm">
-        {post.summary}
-      </p>
-    </article>
-  </Link>
-))}
+const ORIGINAL_BLOG_POSTS = [
+  {
+    title: "Why I Write in Public",
+    slug: "why-i-write-in-public",
+    date: "2024-08-20",
+    readTime: "5 min",
+    summary:
+      "Why I share my work, drafts, and mistakes instead of waiting for perfection.",
+  },
+  {
+    title: "My Engineering Principles",
+    slug: "my-engineering-principles",
+    date: "2024-08-05",
+    readTime: "7 min",
+    summary:
+      "A living list of principles that guide how I design, build, and ship software.",
+  },
+];
 
 const MEDIUM_POSTS = [
   {
@@ -124,7 +122,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Top bar */}
       <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
@@ -145,7 +143,7 @@ export default function HomePage() {
                 className={`rounded-full px-3 py-1 transition ${
                   activeNav === item.id
                     ? "bg-slate-800 text-slate-50"
-                    : "text-slate-300 hover:bg-slate-800/70 hover:text-slate-50"
+                    : "text-slate-600 hover:bg-slate-800/70 hover:text-slate-50"
                 }`}
               >
                 {item.label}
@@ -157,7 +155,7 @@ export default function HomePage() {
             <Link
               href={SOCIAL_LINKS.linkedin}
               target="_blank"
-              className="rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-200 hover:border-cyan-400 hover:text-cyan-300"
+              className="rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-700 hover:border-cyan-400 hover:text-cyan-300"
             >
               LinkedIn
             </Link>
@@ -176,7 +174,7 @@ export default function HomePage() {
         {/* Hero / Profile */}
         <section id="hero" className="grid gap-10 pt-4 md:grid-cols-[2fr,1.4fr]">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-600">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
               Always building, always learning.
             </div>
@@ -185,16 +183,16 @@ export default function HomePage() {
               <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                 {FEATURED_PROFILE.headline}
               </h1>
-              <p className="mt-3 max-w-xl text-sm text-slate-300 sm:text-base">
+              <p className="mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
                 {FEATURED_PROFILE.tagline}
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 text-sm text-slate-300">
-              <span className="rounded-full border border-slate-800 px-3 py-1">
+            <div className="flex flex-wrap gap-3 text-sm text-slate-600">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-700">
                 {FEATURED_PROFILE.location}
               </span>
-              <span className="rounded-full border border-slate-800 px-3 py-1">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-700">
                 Writing about software, systems, and real-world lessons.
               </span>
             </div>
@@ -210,7 +208,7 @@ export default function HomePage() {
               <Link
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
-                className="rounded-full border border-slate-700 px-4 py-2 font-medium text-slate-200 hover:border-cyan-400 hover:text-cyan-300"
+                className="rounded-full border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:border-slate-500 hover:text-slate-900"
               >
                 Connect on LinkedIn
               </Link>
@@ -219,26 +217,26 @@ export default function HomePage() {
 
           {/* Side card */}
           <aside className="space-y-4">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <div className="flex items-center gap-4">
                 <div className="h-16 w-16 rounded-full bg-gradient-to-br from-cyan-500 to-violet-500" />
                 <div>
-                  <h2 className="text-base font-semibold">
+                  <h2 className="text-base font-semibold text-slate-900">
                     {FEATURED_PROFILE.name}
                   </h2>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-slate-600">
                     Writing, building, and sharing the journey in public.
                   </p>
                 </div>
               </div>
-              <div className="mt-4 space-y-1 text-xs text-slate-300">
+              <div className="mt-4 space-y-1 text-xs text-slate-600">
                 <p>• Software & systems</p>
                 <p>• Learning and career journals</p>
                 <p>• Long-form essays & media features</p>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-4 text-xs text-slate-300">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 text-xs text-slate-600 shadow-sm">
               This site is my digital studio. It collects:
               <ul className="mt-2 list-disc space-y-1 pl-5">
                 <li>Deep-dive posts from Medium</li>
@@ -251,10 +249,10 @@ export default function HomePage() {
 
         {/* Profile */}
         <section id="about" className="mt-16 space-y-4">
-          <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+          <h2 className="text-lg font-semibold tracking-tight sm:text-xl text-slate-900">
             Profile
           </h2>
-          <p className="max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
             I’m a{" "}
             <span className="font-medium text-slate-100">
               software engineer and writer
@@ -265,67 +263,75 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* Writing */}
-        <section id="writing" className="mt-16 space-y-6">
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-              Writing
-            </h2>
-            <Link
-              href={SOCIAL_LINKS.medium}
-              target="_blank"
-              className="text-xs font-medium text-cyan-400 hover:text-cyan-300"
-            >
-              View all on Medium →
-            </Link>
+                {/* Medium Articles */}
+        <section id="writing" className="mt-16 space-y-8">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Medium Articles
+              </h2>
+              <p className="mt-1 text-sm text-slate-500">
+                My latest thoughts and insights on{" "}
+                <Link
+                  href={SOCIAL_LINKS.medium}
+                  target="_blank"
+                  className="font-medium text-blue-600 hover:text-blue-500 underline"
+                >
+                  Medium
+                </Link>
+                .
+              </p>
+            </div>
           </div>
 
-          {/* Featured blog posts */}
-          <div className="grid gap-4 md:grid-cols-2">
-            {ORIGINAL_BLOG_POSTS.map((post) => (
+          {/* Medium article cards */}
+          <div className="grid gap-6 md:grid-cols-3">
+            {MEDIUM_POSTS.map((post) => (
               <article
-                key={post.slug}
-                className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 transition hover:border-cyan-500/70 hover:bg-slate-900"
+                key={post.url}
+                className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>{post.date}</span>
-                  <span>{post.readTime}</span>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
+                      {post.date}
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-slate-600">
+                      {post.tag}
+                    </span>
+                  </div>
+                  <h3 className="text-base font-semibold text-slate-900">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-slate-600">
+                    A recent article published on Medium about {post.tag}.
+                  </p>
                 </div>
-                <h3 className="mt-2 text-sm font-semibold text-slate-50 group-hover:text-cyan-300 sm:text-base">
-                  {post.title}
-                </h3>
-                <p className="mt-2 text-xs text-slate-300 sm:text-sm">
-                  {post.summary}
-                </p>
+
+                <div className="mt-4">
+                  <Link
+                    href={post.url}
+                    target="_blank"
+                    className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-500"
+                  >
+                    Read More
+                    <span className="ml-1 text-xs">↗</span>
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
 
-          {/* Medium posts */}
-          <div className="mt-4 space-y-2">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-              Latest from Medium
-            </h3>
-            <div className="divide-y divide-slate-800 rounded-2xl border border-slate-800 bg-slate-950/40">
-              {MEDIUM_POSTS.map((post) => (
-                <Link
-                  key={post.url}
-                  href={post.url}
-                  target="_blank"
-                  className="block px-4 py-3 text-sm hover:bg-slate-900/70"
-                >
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span>{post.date}</span>
-                    <span className="rounded-full border border-slate-700 px-2 py-0.5 text-[10px] uppercase tracking-wide">
-                      {post.tag}
-                    </span>
-                  </div>
-                  <div className="mt-1 font-medium text-slate-100">
-                    {post.title}
-                  </div>
-                </Link>
-              ))}
-            </div>
+          <div className="mt-4 flex justify-center">
+            <Link
+              href={SOCIAL_LINKS.medium}
+              target="_blank"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+            >
+              View All Articles
+              <span className="text-xs">↗</span>
+            </Link>
           </div>
         </section>
 
@@ -334,7 +340,7 @@ export default function HomePage() {
           <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
             Journals
           </h2>
-          <p className="max-w-2xl text-sm text-slate-300">
+          <p className="max-w-2xl text-sm text-slate-600">
             Short, honest entries about what I’m building and learning each
             week — less polished than articles, more like notes from the field.
           </p>
@@ -363,26 +369,28 @@ export default function HomePage() {
 
         {/* Media */}
         <section id="media" className="mt-16 space-y-4">
-          <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+          <h2 className="text-lg font-semibold tracking-tight sm:text-xl text-slate-900">
             Media & Publications
           </h2>
-          <p className="max-w-2xl text-sm text-slate-300">
+          <p className="max-w-2xl text-sm text-slate-600">
             Interviews, podcasts, and features where I’ve shared ideas about
             engineering, writing, and building a career in public.
           </p>
+
           <div className="space-y-3">
             {MEDIA_PUBLICATIONS.map((item) => (
               <Link
                 key={item.title}
                 href={item.url}
                 target="_blank"
-                className="block rounded-2xl border border-slate-800 bg-slate-950/40 px-4 py-3 text-sm hover:border-cyan-500/70 hover:bg-slate-900"
+                rel="noopener noreferrer"
+                className="block rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
               >
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>{item.outlet}</span>
-                  <span>{item.date}</span>
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-medium text-blue-700">{item.outlet}</span>
+                  <span className="text-slate-500">{item.date}</span>
                 </div>
-                <div className="mt-1 font-medium text-slate-100">
+                <div className="mt-1 font-semibold text-slate-900">
                   {item.title}
                 </div>
               </Link>
