@@ -174,7 +174,7 @@ export default function HomePage() {
         {/* Hero / Profile */}
         <section id="hero" className="grid gap-10 pt-4 md:grid-cols-[2fr,1.4fr]">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-600">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs text-slate-700">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
               Always building, always learning.
             </div>
@@ -253,13 +253,8 @@ export default function HomePage() {
             Profile
           </h2>
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
-            I’m a{" "}
-            <span className="font-medium text-slate-100">
-              software engineer and writer
-            </span>{" "}
-            who enjoys turning complex problems into clear systems and clear
-            stories. This blog is where I document experiments, wins, failures,
-            and frameworks I’m testing in the real world.
+            I’m a software engineer and a content writer who enjoys turning complex problems into clear systems and clear
+            stories. This blog is where I document experiments, wins, failures,and frameworks I’m testing in the real world.
           </p>
         </section>
 
